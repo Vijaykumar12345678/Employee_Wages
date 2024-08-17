@@ -4,7 +4,7 @@
 @Date: 2024-08-4
 @Last Modified by: Vijay Kumar M N
 @Last Modified: 2024-08-14
-@Title : python program to compute Compute Employee Wage for multiple companies
+@Title : python program to ability to save the total wage for each company
 
 '''
 import random
@@ -38,7 +38,7 @@ class EmpWageBuilder:
             total_wage += daily_wage
             total_working_hours += daily_hours
             
-            print(f"Day {day + 1}: {status.capitalize()} - Hours Worked: {daily_hours}, Daily Wage: {daily_wage}")
+            #print(f"Day {day + 1}: {status.capitalize()} - Hours Worked: {daily_hours}, Daily Wage: {daily_wage}")
 
         return company_name, total_wage, total_working_hours
 
