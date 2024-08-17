@@ -1,70 +1,94 @@
 '''
-@Author: Vijay Kumar M N
-@Date: 2024-08-13
-@Last Modified by: Vijay Kumar M N
-@Last Modified: 2024-08-13
-@Title: Python program to Calculate Wages till a condition of total working hours or days is reached for a month.
-'''
 
+@Author:Vijay Kumar M N
+@Date: 2024-08-4
+@Last Modified by: Vijay Kumar M N
+@Last Modified: 2024-08-14
+@Title : python program to compute Compute Employee Wage for multiple companies
+
+'''
 import random
 
-class EmployeeWageCalculator:
-    def __init__(self, wage_per_hour=20, full_time_hours=8, part_time_hours=4):
-        self.wage_per_hour = wage_per_hour
-        self.full_time_hours = full_time_hours
-        self.part_time_hours = part_time_hours
-        self.monthly_wage = 0
-        self.total_days = 0
-
-    def check_employee_status(self, day):
+class EmpWageBuilder:
+    @classmethod
+    def calculate_wage(cls, company_name, wage_per_hour, working_days):
         """
         Description:
-        Checks whether the employee is full-time, part-time, or absent.
+        This function will calculate the monthly wage for the company.
         parameter:
-        day: int which day 
-        return:
-        int : working hours
-        """
-        check_time = random.randint(0, 1)
-        if check_time == 1:
-            print(f"Employee is Present on day {day} and is working full time.")
-            return self.full_time_hours
-        else:
-            print(f"Employee is Present but working part-time on day {day}.")
-            return self.part_time_hours
-
-    def calculate_daily_wage(self, hours_worked):
-        """
-        Description:
-        Calculates daily wage based on hours worked.
-        parameter:
-        hours_worked: int its will display the full time working hour or part time working hour
-        return:
-        int : which multiplacation of wage per hour and hours worked"""
-        return self.wage_per_hour * hours_worked
-
-    def calculate_monthly_wage(self, number_of_days):
-        """
-        Description:
-        Calculates the total monthly wage based on number of days worked.
-        parameter:
-        number_of_days: int how many days he is working.
-        return :
-        None"""
-        print("Welcome to Employee Wage Computation")
-        for day in range(1, number_of_days + 1):
-            hours_worked = self.check_employee_status(day)
-            daily_wage = self.calculate_daily_wage(hours_worked)
-            self.monthly_wage += daily_wage
-            self.total_days += 1
-            print(f"The daily wage of Employee is: {daily_wage}\n")
+        company_name: string the company which we are going to calculate.
+        wage_per_hour: int how much amount of wage is for per hour
+        working_days: int how many working days in a month
+        Return:
+        company name
+        working_hours and total wages in a month. """
+        total_working_hours = 0
+        total_wage = 0
         
-        print(f"\nThe total monthly wage of the employee for {self.total_days} days is: {self.monthly_wage}")
+        for day in range(working_days):
+            status = random.choice(["full-time", "part-time"])
+            
+            if status == "full-time":
+                daily_hours = 8
+            else:  # part-time
+                daily_hours = 4
+
+            # Calculate the wage for the day
+            daily_wage = daily_hours * wage_per_hour
+            total_wage += daily_wage
+            total_working_hours += daily_hours
+            
+            print(f"Day {day + 1}: {status.capitalize()} - Hours Worked: {daily_hours}, Daily Wage: {daily_wage}")
+
+        return company_name, total_wage, total_working_hours
+
+def add_company_and_calculate_wages():
+    companies = {}
+
+    while True:
+        print("\nOptions:")
+        print("1. Add a company")
+        print("2. Show company wages")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            company_name = input("Enter the company name: ")
+            if company_name in companies:
+                print(f"The company name {company_name} is already present.")
+            else:
+                wage_per_hour = int(input(f"Enter the wage per hour for {company_name}: "))
+                working_days = int(input(f"Enter the number of working days in a month for {company_name}: "))
+                company_name, total_wage, total_working_hours = EmpWageBuilder.calculate_wage(
+                    company_name, wage_per_hour, working_days
+                )
+                
+                companies[company_name] = {
+                    'total_wage': total_wage,
+                    'total_working_hours': total_working_hours
+                }
+                print(f"\n{company_name} - Total Working Hours: {total_working_hours}, Total Wage: {total_wage}\n")
+
+        elif choice == "2":
+            if not companies:
+                print("\ no companies have been added yet.")
+            else:
+                print("\nSummary of all companies:")
+                for company, details in companies.items():
+                    print(f"{company} - Total Working Hours: {details['total_working_hours']}, Total Wage: {details['total_wage']}")
+
+        elif choice == "3":
+            print("Exiting the program.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+    return companies
 
 def main():
-    number_of_days = int(input("Enter the Number of Days: "))
-    calculator = EmployeeWageCalculator()
-    calculator.calculate_monthly_wage(number_of_days)
+    
+    add_company_and_calculate_wages()
 
 if __name__ == "__main__":
     main()
