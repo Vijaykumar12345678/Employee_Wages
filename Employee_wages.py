@@ -8,39 +8,57 @@
 
 '''
 import random
-def check_employee(employee):
+WAGE_PER_HOUR = 20
+FULL_TIME = 8
+PART_TIME = 4
+month_working_days = 20
+
+def check_employee():
     """
     Description:
-    This funtion is to check that employee is present or absent and calculate the daily wages and monthly for the full time employee and part time employee.
-    parameters:
-    employee : int which is to check if it is 1 then present  or else absent.
-    return:None """
+    This function checks if the employee is present or absent and calculates the wages for full-time or part-time employees.
     
-    wage_per_hour=20
-    full_time=8
-    part_time=4
-    month_working_days=20
-    print("""Welcome to Employee Wage Computation""")
-    if employee==1:
-        check_time=random.randint(0,1)
-        if check_time==0:
-            daily_wage=wage_per_hour*part_time
-            print(f"The Employee is part time Present and employee daily wage is {daily_wage} ")
-            print(f"The Employee is part time present and monthly wage is {daily_wage*month_working_days}")
+    Parameters:
+    employee : int  An integer that is 1 if the employee is present or 0 if absent.
+    
+    Returns:
+    None
+    """
+    employee = random.randint(0, 1)
+    if employee == 1:
+        check_time = random.randint(0, 1)
+        if check_time == 0:
+            daily_wage, monthly_wage = calculate_wages(PART_TIME)
+            print(f"The Employee is part-time Present and employee daily wage is {daily_wage}")
+            print(f"The Employee is part-time Present and monthly wage is {monthly_wage}")
         else:
-            print(f"The Employee is full time Present and employee daily wage is {wage_per_hour*full_time}")
-            print(f"The Employee is part time present and monthly wage is {wage_per_hour*full_time*month_working_days}")
-
-
+            daily_wage, monthly_wage = calculate_wages(FULL_TIME)
+            print(f"The Employee is full-time Present and employee daily wage is {daily_wage}")
+            print(f"The Employee is full-time Present and monthly wage is {monthly_wage}")
     else:
         print("The Employee is Absent and Employee daily and monthly wage is 0")
 
+
+def calculate_wages(hours):
+    """
+    Description:
+    This function calculates the daily wage and monthly wage based on the number of hours worked.
+    
+    Parameters:
+    hours (int): The number of hours the employee worked.
+    
+    Returns:
+    tuple: A tuple containing the daily wage and the monthly wage.
+    """
+    daily_wage = WAGE_PER_HOUR * hours
+    monthly_wage = daily_wage * month_working_days
+    return daily_wage, monthly_wage
+
 def main():
-    employee=random.randint(0,1)
-    check_employee(employee)
+    print("-------Welcome to Employee Wage Computation-------")
+    
+    check_employee()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
-
-
 
