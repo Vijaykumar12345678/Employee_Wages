@@ -8,20 +8,22 @@
 
 '''
 import random
-def check_employee(employee):
+def check_employee():
     """
     Description:
     This funtion is to check that employee is present or absent.
     parameters:
     employee : int which is to check if it is 1 then present  or else absent.
     return:None """
-    if employee==1:
+    number=random.randint(0,1)
+    if number==1:
         print("The Employee is Present.")
     else:
         print("The Employee is Absent")
 def main():
-    number=random.randint(0,1)
-    check_employee(number)
+    print("------- Welcome to Employee Wage Computation Program--------")
+
+    check_employee()
 
 if __name__=="__main__":
     main()
