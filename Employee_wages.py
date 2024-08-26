@@ -8,56 +8,60 @@
 
 '''
 import random
-def check_employee(number_of_days):
+
+WAGE_PER_HOUR = 20
+FULL_TIME = 8
+PART_TIME = 4
+MONTH_WORKING_DAYS = 20
+
+def calculate_wages(hours):
     """
     Description:
-    This function will display the each day id the employee is part time or full time and then calculate the monthly wages .
-    parameters:
-    employee : int which is to check if it is 1 then present  or else absent.
-    return:None """
+    This function calculates the daily wage and monthly wage based on the number of hours worked.
     
-    wage_per_hour=20
-    full_time=8
-    part_time=4
-    monthly_wage=0
-    daily_wage=0
-    counter=0
-    print("""Welcome to Employee Wage Computation""")
+    Parameters:
+    hours (int): The number of hours the employee worked.
     
-    for i in range(1,number_of_days+1):
+    Returns:
+    tuple: A tuple containing the daily wage and the monthly wage.
+    """
+    daily_wage = WAGE_PER_HOUR * hours
+    monthly_wage = daily_wage * MONTH_WORKING_DAYS
+    return daily_wage, monthly_wage
 
-            check_time=random.randint(0,1)
-            if check_time==1:
-                  print(f"Employee is Present on day and is working full time: {i}")
-                  daily_wage = wage_per_hour * full_time
-                  print(f"The daily wage of Employee is: {daily_wage}")
-                  print(" \n ")
-                  counter += 1
-            elif check_time==0:
-                print(f"Employee is Present but working part time on day: {i}")
-                daily_wage = wage_per_hour * part_time
-                print(f"The daily wage of Employee is: {daily_wage}")
-                print(" \n ")
-            else:
-                 print(f"Employee is Absent on day: {i}")
-                 daily_wage = 0
-                 print(f"The daily wage of Employee is: {daily_wage}")
-                 print(" \n ")
-            monthly_wage+=daily_wage
-    print("\n")
+def check_employee(employee):
+    """
+    Description:
+    This function checks if the employee is present or absent and calculates the wages for full-time or part-time employees.
     
-            #if total_hours >= 100 and counter >= 20:
-    print(f"The monthly wage of employee is: {monthly_wage}")
-            #else:
-            #print(f"The monthly wage of employee is: {monthly_wage}")
+    Parameters:
+    employee (int): An integer that is 1 if the employee is present or 0 if absent.
+    
+    Returns:
+    None
+    """
+    print("Welcome to Employee Wage Computation")
+    
+    if employee == 1:
+        check_time = random.randint(0, 1)
+        if check_time == 0:
+            daily_wage, monthly_wage = calculate_wages(PART_TIME)
+            print(f"The Employee is part-time Present and employee daily wage is {daily_wage}")
+            print(f"The Employee is part-time Present and monthly wage is {monthly_wage}")
+        else:
+            daily_wage, monthly_wage = calculate_wages(FULL_TIME)
+            print(f"The Employee is full-time Present and employee daily wage is {daily_wage}")
+            print(f"The Employee is full-time Present and monthly wage is {monthly_wage}")
+    else:
+        print("The Employee is Absent and Employee daily and monthly wage is 0")
 
 def main():
-    number_of_days=int(input("Enter the Number of Days: "))
+    employee = random.randint(0, 1)
+    check_employee(employee)
 
-    check_employee(number_of_days)
-
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
+
 
 
 
