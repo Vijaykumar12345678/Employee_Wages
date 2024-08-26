@@ -7,27 +7,47 @@
 @Title : python program to calculate the daily wages for the employee.
 
 '''
+
 import random
-def check_employee(employee):
+WAGE_PER_HOUR=20
+FULL_TIME=8
+
+def check_employee():
     """
     Description:
     This funtion is to check that employee is present or absent.
     parameters:
-    employee : int which is to check if it is 1 then present  or else absent.
-    return:None """
+    None
+    return:present or absent """
+    employee=random.randint(0,1)
     
-    print("""Welcome to Employee Wage Computation""")
     if employee==1:
+        return "Present"
+    else:
+        return "Absent"
         
-        wage_per_hour=20
-        full_day=8
-        daily_wage=wage_per_hour*full_day
+def calculate_wages(status):
+    """
+    Description:
+    This function is used to calculate the wages of the Employee
+    parameters:
+    status: string if the employee is present or absent
+    return:
+    None"""
+    if status=="Present":
+        daily_wage=WAGE_PER_HOUR*FULL_TIME
         print(f"The Employee is Present and employee wage is {daily_wage} ")
     else:
-        print("The Employee is Absent and Employee wage is 0")
+        print("The Employee is Absent and Employee wage is 0")    
+
 def main():
-    number=random.randint(0,1)
-    check_employee(number)
+
+    print("""-------Welcome to Employee Wage Computation-------""")
+    #checking the attendance
+
+    status=check_employee()
+    #calculating the wages
+    calculate_wages(status)
 
 if __name__=="__main__":
     main()
