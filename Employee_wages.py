@@ -1,29 +1,27 @@
 '''
-
-@Author:Vijay Kumar M N
+@Author: Vijay Kumar M N
 @Date: 2024-08-13
 @Last Modified by: Vijay Kumar M N
 @Last Modified: 2024-08-13
-@Title : python program to check employee present full time or part and then calculate the wages.
-
+@Title: Python program to check employee presence (full-time or part-time) and calculate wages.
 '''
+
 import random
 
 WAGE_PER_HOUR = 20
 FULL_TIME = 8
-PART_TIME= 4
-
+PART_TIME = 4
 
 def check_employee():
     """
     Description:
-    This function checks if the employee is present or absent and calculates the wages for full-time or part-time employees.
+    This function checks if the employee is present or absent, and calculates the wages for full-time or part-time employees using match-case.
     
     Parameters:
     None
     
     Returns:
-    None
+    tuple: A tuple containing employee status Absent, Part-time or Full-time and the corresponding wage.
     """
     
     employee = random.randint(0, 1)
@@ -33,12 +31,13 @@ def check_employee():
             match check_time:
                 case 0:
                     daily_wage = calculate_wage(PART_TIME)
-                    print(f"The Employee is part-time Present and employee wage is {daily_wage}")
+                    return "Part-time", daily_wage
                 case 1:
                     daily_wage = calculate_wage(FULL_TIME)
-                    print(f"The Employee is full-time Present and employee wage is {daily_wage}")
+                    return "Full-time", daily_wage
         case 0:
-            print("The Employee is Absent and Employee wage is 0")
+            return "Absent", 0
+
 def calculate_wage(hours):
     """
     Description:
@@ -54,7 +53,8 @@ def calculate_wage(hours):
 
 def main():
     print("--------Welcome to Employee Wage Computation-------")    
-    check_employee()
+    status, wage = check_employee()
+    print(f"The Employee is {status} and the wage is {wage}")
 
 if __name__ == "__main__":
     main()
