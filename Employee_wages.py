@@ -17,14 +17,18 @@ def check_employee():
     return:
     None """
     employee=random.randint(0,1)
+    
     if employee==1:
-        print("The Employee is Present.")
+        return "Present"
     else:
-        print("The Employee is Absent")
-def main():
-    print("------- Welcome to Employee Wage Computation Program--------")
+        return "Absent"
 
-    check_employee()
+def main():
+
+    print("------- Welcome to Employee Wage Computation Program--------")
+    #employee attendance
+    status=check_employee()
+    print(f"The Employee is {status}.")
 
 if __name__=="__main__":
     main()
