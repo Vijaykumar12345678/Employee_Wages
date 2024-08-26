@@ -11,7 +11,7 @@ import random
 WAGE_PER_HOUR = 20
 FULL_TIME = 8
 PART_TIME = 4
-month_working_days = 20
+MONTH_WORKING_DAYS= 20
 
 def check_employee():
     """
@@ -51,7 +51,7 @@ def calculate_wages(hours):
     tuple: A tuple containing the daily wage and the monthly wage.
     """
     daily_wage = WAGE_PER_HOUR * hours
-    monthly_wage = daily_wage * month_working_days
+    monthly_wage = daily_wage * MONTH_WORKING_DAYS
     return daily_wage, monthly_wage
 
 def main():
