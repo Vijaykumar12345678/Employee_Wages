@@ -18,7 +18,8 @@ def check_employee():
     This funtion is to check that employee is present or absent.
     parameters:
     None
-    return:present or absent """
+    return:
+    string: present or absent """
     employee=random.randint(0,1)
     
     if employee==1:
@@ -33,13 +34,13 @@ def calculate_wages(status):
     parameters:
     status: string if the employee is present or absent
     return:
-    None"""
-    if status=="Present":
-        daily_wage=WAGE_PER_HOUR*FULL_TIME
-        print(f"The Employee is Present and employee wage is {daily_wage} ")
-    else:
-        print("The Employee is Absent and Employee wage is 0")    
+    int :  wages of the employee """
 
+    if status=="Present":
+        return WAGE_PER_HOUR*FULL_TIME
+        
+    else:
+        return 0
 def main():
 
     print("""-------Welcome to Employee Wage Computation-------""")
@@ -47,7 +48,11 @@ def main():
 
     status=check_employee()
     #calculating the wages
-    calculate_wages(status)
+    wages=calculate_wages(status)
+    if wages>0:
+        print(f"The Employee is Present and employee wage is {wages} ")
+    else:
+        print("The Employee is Absent and Employee wage is 0")    
 
 if __name__=="__main__":
     main()
