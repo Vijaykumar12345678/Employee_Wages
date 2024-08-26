@@ -15,7 +15,7 @@ def check_employee():
     parameters:
     None
     return:
-    None """
+    string: The employee is present or absent """
     employee=random.randint(0,1)
     
     if employee==1:
