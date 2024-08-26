@@ -13,10 +13,11 @@ def check_employee():
     Description:
     This funtion is to check that employee is present or absent.
     parameters:
-    employee : int which is to check if it is 1 then present  or else absent.
-    return:None """
-    number=random.randint(0,1)
-    if number==1:
+    None
+    return:
+    None """
+    employee=random.randint(0,1)
+    if employee==1:
         print("The Employee is Present.")
     else:
         print("The Employee is Absent")
