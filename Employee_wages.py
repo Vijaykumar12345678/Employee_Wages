@@ -8,32 +8,53 @@
 
 '''
 import random
-def check_employee(employee):
+
+WAGE_PER_HOUR=20
+FULL_TIME=8
+PART_TIME=4
+def check_employee():
     """
     Description:
     This funtion is to check that employee is present or absent and calculate the wages for the full time employee and part time employee.
     parameters:
-    employee : int which is to check if it is 1 then present  or else absent.
-    return:None """
-    
-    wage_per_hour=20
-    full_time=8
-    part_time=4
+    None
+    return:
+    None """
+    employee=random.randint(0,1)
+
     
     if employee==1:
-        check_time=random.randint(0,1)
+        check_time=random.randint(0,2)
         if check_time==0:
-            daily_wage=wage_per_hour*part_time
-            print(f"The Employee is part time Present and employee wage is {daily_wage} ")
+            return "Present"
+        elif check_time==1:
+            return "Parttime"
         else:
-            print(f"The Employee is full time Present and employee wage is {wage_per_hour*full_time}")
-
-
+            return "Absent"
     else:
-        print("The Employee is Absent and Employee wage is 0")
+        return "Absent"
+def calculate_wages(wage_per_hour,check_time):
+    """
+    Description:
+    This function is used to calculate the wages of the Employee
+    parameters:
+    wage_per_time: int  which is the wage per hour of the employee
+    check_time: int which is the time for which the employee is present
+    return:
+    multiplies of wage_per_hour and check time"""
+    return wage_per_hour*check_time       
 def main():
-    employee=random.randint(0,1)
-    check_employee(employee)
+    print("""-------Welcome to Employee Wage Computation-------""")
+    #check Employee is presentot not
+    employee=check_employee()
+    if employee=="Present":
+        daily_wage=calculate_wages( WAGE_PER_HOUR,FULL_TIME)
+        print(f"The Employee is Present and employee wage is {daily_wage}")
+    elif employee=="Parttime":
+        daily_wage=calculate_wages( WAGE_PER_HOUR,PART_TIME)
+        print(f"The Employee is Present and employee wage is {daily_wage}")
+    else:
+        print(f"The Employee is Absent and employee wage is {0}")
 
 if __name__=="__main__":
     main()
