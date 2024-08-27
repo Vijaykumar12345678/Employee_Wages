@@ -64,15 +64,15 @@ def calculate_wages_for_month():
                 
                 tot_working_hours+=FULL_TIME
                 total_wage += WAGE_PER_HOUR * FULL_TIME
-                daily_wages[tot_working_days+1]=WAGE_PER_HOUR*FULL_TIME
+                daily_wages[f"Day_{tot_working_days+1}"]=WAGE_PER_HOUR*FULL_TIME
             else:
                 tot_working_hours+=PART_TIME
                 total_wage+=WAGE_PER_HOUR*PART_TIME
-                daily_wages[tot_working_days+1]=WAGE_PER_HOUR*PART_TIME
+                daily_wages[f"Day_{tot_working_days+1}"]=WAGE_PER_HOUR*PART_TIME
             tot_working_days+=1
         else:
             tot_working_days+=1
-            daily_wages[tot_working_days]=0
+            daily_wages[f"Day_{tot_working_days}"]=0
     
 
 
