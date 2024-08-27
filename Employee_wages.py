@@ -48,7 +48,7 @@ def calculate_wages_for_month():
         dict: daily wages
     """
     total_wage = 0
-    total_wages={}
+    daily_wages={}
    
 
     for day in range(MONTH_WORKING_DAYS):
@@ -58,24 +58,24 @@ def calculate_wages_for_month():
                 
                 
                 total_wage += WAGE_PER_HOUR * FULL_TIME
-                total_wages[f"Day_{day+1}"]=WAGE_PER_HOUR*FULL_TIME
+                daily_wages[f"Day_{day+1}"]=WAGE_PER_HOUR*FULL_TIME
             else:
                 
                 total_wage+=WAGE_PER_HOUR*PART_TIME
-                total_wages[f"Day_{day+1}"]=WAGE_PER_HOUR*PART_TIME
+                daily_wages[f"Day_{day+1}"]=WAGE_PER_HOUR*PART_TIME
         else:
-            total_wages[f"Day_{day+1}"]=0
+            daily_wages[f"Day_{day+1}"]=0
     
 
 
-    return   total_wage,total_wages
+    return   total_wage,daily_wages
 
 def main():
     
     print("-------Welcome to Employee Wage Computation-------")
     
-    total_wage,total_wages = calculate_wages_for_month()
-    print(f"The Daily Wages:\n{total_wages}")
+    total_wage,daily_wages = calculate_wages_for_month()
+    print(f"The Daily Wages:\n{daily_wages}")
     print(f"Total monthly wage: RS.{total_wage}")
 
 if __name__ == "__main__":
