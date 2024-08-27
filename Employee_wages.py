@@ -74,7 +74,7 @@ def main():
     
     total_wage,total_wages = calculate_wages_for_month()
     print(f"The Daily Wages:\n{total_wages}")
-    print(f"Total monthly wage: {total_wage}")
+    print(f"Total monthly wage: RS{total_wage}")
 
 if __name__ == "__main__":
     main()
