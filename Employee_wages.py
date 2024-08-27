@@ -18,25 +18,23 @@ def check_employee():
     This function checks if the employee is present or absent, and calculates the wages for full-time or part-time employees using match-case.
     
     Parameters:
-    None
+        None
     
     Returns:
-    tuple: A tuple containing employee status Absent, Part-time or Full-time and the corresponding wage.
+        "Present" : string If the employee present
+        "Absent" : string If the employee absent
     """
     
     employee = random.randint(0, 1)
-    match employee:
-        case 1:
-            check_time = random.randint(0, 1)
-            match check_time:
-                case 0:
-                    daily_wage = calculate_wage(PART_TIME)
-                    return "Part-time", daily_wage
-                case 1:
-                    daily_wage = calculate_wage(FULL_TIME)
-                    return "Full-time", daily_wage
-        case 0:
-            return "Absent", 0
+    if employee==1:
+        check_time=random.randint(0,1)
+        if check_time==0:
+            return "FullTime"
+        else:
+            return "PartTime"
+        
+    else:
+        return "Absent"
 
 def calculate_wage(hours):
     """
@@ -53,8 +51,19 @@ def calculate_wage(hours):
 
 def main():
     print("--------Welcome to Employee Wage Computation-------")    
-    status, wage = check_employee()
-    print(f"The Employee is {status} and the wage is {wage}")
+    status=check_employee()
+    
+    match status:
+         
+        case "FullTime":
+            print(f"The Employee is Fulltime present  and the wage is {calculate_wage(FULL_TIME)}")
+  
+        case"PartTime":
+            print(f"The Employee is Parttime present  and the wage is {calculate_wage(PART_TIME)}") 
+  
+        case "Absent":
+            print(f"The Employee is Absent and wage is 0")
+        
 
 if __name__ == "__main__":
     main()
