@@ -27,7 +27,7 @@ def check_employee():
     else:
         return "Absent"
         
-def calculate_wages(status):
+def calculate_wages():
     """
     Description:
     This function is used to calculate the wages of the Employee
@@ -36,11 +36,10 @@ def calculate_wages(status):
     return:
     int :  wages of the employee """
 
-    if status=="Present":
-        return WAGE_PER_HOUR*FULL_TIME
+    
+    return WAGE_PER_HOUR*FULL_TIME
         
-    else:
-        return 0
+    
 def main():
 
     print("""-------Welcome to Employee Wage Computation-------""")
@@ -48,8 +47,8 @@ def main():
 
     status=check_employee()
     #calculating the wages
-    wages=calculate_wages(status)
-    if wages>0:
+    wages=calculate_wages()
+    if status=="Present":
         print(f"The Employee is Present and employee wage is {wages} ")
     else:
         print("The Employee is Absent and Employee wage is 0")    
