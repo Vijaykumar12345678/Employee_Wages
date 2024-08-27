@@ -10,82 +10,126 @@
 import random
 
 class EmpWageBuilder:
+    WAGE_PER_HOUR = 0
+    FULL_TIME = 8
+    PART_TIME = 4
+    MONTH_WORKING_DAYS = 0
+    MAXIMUM_WORKING_HOURS = 100
+    
     @classmethod
-    def calculate_wage(cls, wage_per_hour, working_days):
+    def check_employee(cls):
         """
         Description:
-        This function calculates the total monthly wage and total working hours for a company.
-        
-        Parameters:
-        wage_per_hour : int  Wage per hour.
-        working_days : int Number of working days in a month.
-        
+            This function checks if the employee is present and returns their status.
+
         Returns:
-        tuple: Total wage and total working hours for the month.
+            full-time Present : string If the employee is present full-time
+            part-time Present : string If the employee is present part-time
+            Absent: string If the employee is absent
         """
-        total_working_hours = 0
-        total_wage = 0
-        
-        for day in range(working_days):
-            status = random.choice(["full-time", "part-time", "absent"])
-            
-            if status == "full-time":
-                daily_hours = 8
-            elif status == "part-time":
-                daily_hours = 4
+        employee = random.randint(0, 1)
+        if employee == 1:
+            check_time = random.randint(0, 1)
+            if check_time == 0:
+                return "full-time Present"
             else:
-                daily_hours = 0
+                return "part-time Present"
+        else:
+            return "Absent"
+    
+    @classmethod
+    def calculate_wages_for_month(cls):
+        """
+        Description:
+            This function calculates the total monthly wage by checking each day whether the employee is present and whether they worked full-time or part-time.
 
-            # Calculate the wage for the day
-            daily_wage = daily_hours * wage_per_hour
-            total_wage += daily_wage
-            total_working_hours += daily_hours
+        Returns:
+            total_wage : int Monthly wage
+            daily_wages : dict Daily wages with details
+            tot_working_hours : int Total working hours
+            tot_working_days : int Total working days
+        """
+        total_wage = 0
+        daily_wages = {}
+        tot_working_hours, tot_working_days = 0, 0
+        
+        while tot_working_hours < cls.MAXIMUM_WORKING_HOURS and tot_working_days < cls.MONTH_WORKING_DAYS:
+            status = cls.check_employee()
+            daily_wages[f"Day_{tot_working_days + 1}"] = {
+                'status': status,
+                'hours_worked': 0,
+                'daily_wage': 0
+            }
+            
+            if status != "Absent":
+                if status == "full-time Present":
+                    hours = cls.FULL_TIME
+                else:
+                    hours = cls.PART_TIME
+                
+                daily_wages[f"Day_{tot_working_days + 1}"]['hours_worked'] = hours
+                daily_wages[f"Day_{tot_working_days + 1}"]['daily_wage'] = cls.WAGE_PER_HOUR * hours
+                tot_working_hours += hours
+                total_wage += cls.WAGE_PER_HOUR * hours
+            tot_working_days += 1
 
-        return total_wage, total_working_hours
+        return total_wage, daily_wages, tot_working_hours, tot_working_days
+
 
 def add_company(companies, company_name, wage_per_hour, working_days):
     """
     Description:
-    Adds a new company to the list and calculates its wage details.
+        Adds a new company to the list and calculates its wage details.
     
     Parameters:
-    companies : dict Dictionary of companies and their wage details.
-    company_name : string Name of the company to add.
-    wage_per_hour : int Wage per hour for the company.
-    working_days : int Number of working days in a month for the company.
+        companies : dict Dictionary of companies and their wage details.
+        company_name : string Name of the company to add.
+        wage_per_hour : int Wage per hour for the company.
+        working_days : int Number of working days in a month for the company.
     
     Returns:
-    None
+        str Summary of the company's working hours and total wage.
     """
     if company_name in companies:
         return f"The company name {company_name} is already present."
     
-    total_wage, total_working_hours = EmpWageBuilder.calculate_wage(wage_per_hour, working_days)
+    EmpWageBuilder.WAGE_PER_HOUR = wage_per_hour
+    EmpWageBuilder.MONTH_WORKING_DAYS = working_days
+
+    total_wage, daily_wages, total_working_hours, total_working_days = EmpWageBuilder.calculate_wages_for_month()
     
     companies[company_name] = {
         'total_wage': total_wage,
-        'total_working_hours': total_working_hours
+        'daily_wages': daily_wages,
+        'total_working_hours': total_working_hours,
+        'total_working_days': total_working_days
     }
+    
     return f"{company_name} - Total Working Hours: {total_working_hours}, Total Wage: {total_wage}"
+
 
 def display_companies(companies):
     """
     Description:
-    Displays the summary of all companies and their wage details.
+        Displays the summary of all companies and their wage details, including daily wages.
     
     Parameters:
-    companies : dict Dictionary of companies and their wage details.
+        companies : dict Dictionary of companies and their wage details.
     
     Returns:
-    None
+        str Summary of all companies.
     """
     if not companies:
         return "No companies have been added yet."
     
     summary = "Summary of all companies:\n"
     for company, details in companies.items():
-        summary += f"{company} - Total Working Hours: {details['total_working_hours']}, Total Wage: {details['total_wage']}\n"
+        summary += f"\n{company} - Total Working Hours: {details['total_working_hours']}, Total Wage: {details['total_wage']}\n"
+        summary += "  Daily Wages:\n"
+        for day, wage_info in details['daily_wages'].items():
+            summary += f"    {day}: Status: {wage_info['status']}, Hours Worked: {wage_info['hours_worked']}, Daily Wage: {wage_info['daily_wage']}\n"
     return summary
+
 
 def main():
     companies = {}
@@ -117,3 +161,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
