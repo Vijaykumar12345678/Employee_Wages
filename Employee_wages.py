@@ -15,11 +15,14 @@ FULL_TIME=8
 def check_employee():
     """
     Description:
-    This funtion is to check that employee is present or absent.
+        This funtion is to check that employee is present or absent.
+    
     parameters:
-    None
+        None
+    
     return:
-    string: present or absent """
+        "Present" : string If the employee present
+        "Absent" : string If the employee absent """
     employee=random.randint(0,1)
     
     if employee==1:
@@ -30,13 +33,13 @@ def check_employee():
 def calculate_wages():
     """
     Description:
-    This function is used to calculate the wages of the Employee
+        This function is used to calculate the wages of the Employee
     
     parameters:
-    None
+        None
     
     return:
-    int :  wages of the employee """
+        int :  wages of the employee """
 
     
     return WAGE_PER_HOUR*FULL_TIME
