@@ -63,6 +63,8 @@ def calculate_wages_for_month():
                 
                 total_wage+=WAGE_PER_HOUR*PART_TIME
                 total_wages[day+1]=WAGE_PER_HOUR*PART_TIME
+        else:
+            total_wages[day+1]=0
     
 
 
@@ -74,7 +76,7 @@ def main():
     
     total_wage,total_wages = calculate_wages_for_month()
     print(f"The Daily Wages:\n{total_wages}")
-    print(f"Total monthly wage: RS{total_wage}")
+    print(f"Total monthly wage: RS.{total_wage}")
 
 if __name__ == "__main__":
     main()
