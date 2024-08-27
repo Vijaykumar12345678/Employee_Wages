@@ -16,6 +16,7 @@ class EmpWageBuilder:
     MONTH_WORKING_DAYS = 0
     MAXIMUM_WORKING_HOURS = 100
     
+    
     @classmethod
     def check_employee(cls):
         """
