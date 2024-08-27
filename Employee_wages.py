@@ -21,21 +21,22 @@ def check_employee():
     None
     
     return:
-    None """
+     "Present" : string If the employee present
+     "Absent" : string If the employee absent  """
     employee=random.randint(0,1)
 
     
     if employee==1:
-        check_time=random.randint(0,2)
+        check_time=random.randint(0,1)
         if check_time==0:
-            return "Present"
+            return "FullTime"
         else:
-            return "Parttime"
+            return "PartTime"
         
     else:
         return "Absent"
 
-def calculate_wages(check_time):
+def calculate_wages(check_type):
     """
     Description:
     This function is used to calculate the wages of the Employee
@@ -46,23 +47,23 @@ def calculate_wages(check_time):
     
     return:
     int:calculated the wages   """
-    return  WAGE_PER_HOUR *check_time       
+    return  WAGE_PER_HOUR *check_type       
 
 def main():
     print("""-------Welcome to Employee Wage Computation-------""")
 
-    #check Employee is presentot not
+    #check Employee is present or not
     employee=check_employee()
     
     #employee is full time present
 
-    if employee=="Present":
-        daily_wage=calculate_wages( FULL_TIME)
+    if employee=="FullTime":
+        daily_wage=calculate_wages(FULL_TIME)
         print(f"The Employee is Present fulltime and employee wage is {daily_wage}")
     #employee is part time present
     
-    elif employee=="Parttime":
-        daily_wage=calculate_wages( PART_TIME)
+    elif employee=="PartTime":
+        daily_wage=calculate_wages(PART_TIME)
         print(f"The Employee is Present parttime and employee wage is {daily_wage}")
     
     else:
