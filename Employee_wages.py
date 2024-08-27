@@ -3,9 +3,8 @@
 @Date: 2024-08-13
 @Last Modified by: Vijay Kumar M N
 @Last Modified: 2024-08-13
-@Title: Python program to Calculate Wages till a condition of total working hours or days is reached for a month.
+@Title: Python program to calculate employee monthly wage 
 '''
-
 import random
 
 class EmployeeWageCalculator:
