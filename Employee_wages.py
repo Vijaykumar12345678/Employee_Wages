@@ -24,21 +24,21 @@ def check_employee():
     Returns:
     tuple: A tuple containing the employee status, daily wage, and monthly wage.
     """
-    for i in range(0,20):
-        employee = random.randint(0, 1)
-        if employee == 1:
-            check_time = random.randint(0, 1)
-            if check_time == 0:
-                daily_wage, monthly_wage = calculate_wages(PART_TIME)
+   
+    employee = random.randint(0, 1)
+    if employee == 1:
+        check_time = random.randint(0, 1)
+        if check_time == 0:
+            daily_wage, monthly_wage = calculate_wages(PART_TIME)
                 
-                return "part-time Present", daily_wage, monthly_wage
+            return "part-time Present", daily_wage, monthly_wage
                 
-            else:
-                 daily_wage, monthly_wage = calculate_wages(FULL_TIME)
-                 return "full-time Present", daily_wage, monthly_wage
-            
         else:
-            return "Absent", 0, 0
+            daily_wage, monthly_wage = calculate_wages(FULL_TIME)
+            return "full-time Present", daily_wage, monthly_wage
+            
+    else:
+        return "Absent", 0, 0
  
 def calculate_wages(hours):
     """
