@@ -15,7 +15,7 @@ PART_TIME = 4
 def check_employee():
     """
     Description:
-    This function checks if the employee is present or absent, and calculates the wages for full-time or part-time employees using match-case.
+        This function checks if the employee is present or absent, and calculates the wages for full-time or part-time employees using match-case.
     
     Parameters:
         None
@@ -39,17 +39,18 @@ def check_employee():
 def calculate_wage(hours):
     """
     Description:
-    This function calculates the wage based on the number of hours worked.
+        This function calculates the wage based on the number of hours worked.
     
     Parameters:
-    hours : int The number of hours the employee worked.
+        hours : int The number of hours the employee worked.
     
     Returns:
-    int: The calculated wage.
+        int: The calculated wage.
     """
     return WAGE_PER_HOUR * hours
 
 def main():
+    
     print("--------Welcome to Employee Wage Computation-------")    
     status=check_employee()
     
