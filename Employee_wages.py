@@ -16,51 +16,63 @@ MONTH_WORKING_DAYS = 20
 def check_employee():
     """
     Description:
-    This function checks if the employee is present or absent and returns their status along with the daily and monthly wages.
-    
-    parameters:
-    None 
+        This function checks if the employee is present and returns their status and hours worked.
+
+    Parameters:
+        None
 
     Returns:
-    tuple: A tuple containing the employee status, daily wage, and monthly wage.
+        "Present" : string If the employee is present
+        "Absent" : string If the employee is absent
     """
-   
     employee = random.randint(0, 1)
     if employee == 1:
         check_time = random.randint(0, 1)
         if check_time == 0:
-            daily_wage, monthly_wage = calculate_wages(PART_TIME)
-                
-            return "part-time Present", daily_wage, monthly_wage
-                
+            return "full-time Present"
         else:
-            daily_wage, monthly_wage = calculate_wages(FULL_TIME)
-            return "full-time Present", daily_wage, monthly_wage
-            
+            return "part-time Present"
     else:
-        return "Absent", 0, 0
- 
-def calculate_wages(hours):
+        return "Absent"
+
+def calculate_wages_for_month():
     """
     Description:
-    This function calculates the daily wage and monthly wage based on the number of hours worked.
-    
+        This function calculates the total monthly wage by checking each day whether the employee is present and whether they worked full-time or part-time.
+
     Parameters:
-    hours : int The number of hours the employee worked.
-    
+        None
+
     Returns:
-    tuple: A tuple containing the daily wage and the monthly wage.
+        int : Monthly wage
     """
-    daily_wage = WAGE_PER_HOUR * hours
-    monthly_wage = daily_wage * MONTH_WORKING_DAYS
-    return daily_wage, monthly_wage
+    total_wage = 0
+    total_wages={}
+   
+
+    for day in range(MONTH_WORKING_DAYS):
+        status= check_employee()
+        if status != "Absent":
+            if status=="full-time Present":
+                
+                
+                total_wage += WAGE_PER_HOUR * FULL_TIME
+                total_wages[day+1]=WAGE_PER_HOUR*FULL_TIME
+            else:
+                
+                total_wage+=WAGE_PER_HOUR*PART_TIME
+                total_wages[day+1]=WAGE_PER_HOUR*PART_TIME
+    print(total_wages)
+
+
+    return   total_wage
 
 def main():
+    
     print("-------Welcome to Employee Wage Computation-------")
     
-    status, daily_wage, monthly_wage = check_employee()
-    print(f"The Employee is {status} and employee daily wage is {daily_wage}")
-    print(f"The Employee is {status} and monthly wage is {monthly_wage}")
+    total_wage = calculate_wages_for_month()
+    print(f"Total monthly wage: {total_wage}")
 
 if __name__ == "__main__":
     main()
