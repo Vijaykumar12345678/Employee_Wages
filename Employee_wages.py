@@ -31,8 +31,10 @@ def calculate_wages():
     """
     Description:
     This function is used to calculate the wages of the Employee
+    
     parameters:
-    status: string if the employee is present or absent
+    None
+    
     return:
     int :  wages of the employee """
 
