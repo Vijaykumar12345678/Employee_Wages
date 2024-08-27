@@ -108,7 +108,7 @@ def add_company(companies, company_name, wage_per_hour, working_days):
     return f"{company_name} - Total Working Hours: {total_working_hours}, Total Wage: {total_wage}"
 
 
-def display_companies(companies,daily_wages):
+def display_companies(companies):
     """
     Description:
         Displays the summary of all companies and their wage details, including daily wages.
