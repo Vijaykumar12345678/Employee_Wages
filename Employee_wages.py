@@ -11,15 +11,7 @@ import random
 
 class CompanyEmpWage:
     def __init__(self, company_name, wage_per_hour, working_days, max_working_hours):
-        """
-        Initializes the CompanyEmpWage with the company's details.
-
-        Parameters:
-        company_name : str  Name of the company.
-        wage_per_hour : int  Wage per hour for the company.
-        working_days : int  Number of working days in a month for the company.
-        max_working_hours : int  Maximum working hours in a month.
-        """
+        
         self.company_name = company_name
         self.wage_per_hour = wage_per_hour
         self.working_days = working_days
@@ -31,14 +23,17 @@ class CompanyEmpWage:
 
     def check_employee(self):
         """
-        Determines the daily hours and status of an employee.
+        Description:
+            Determines the daily hours and status of an employee.
 
+        Parameters:
+            None
         Returns:
-        tuple: (daily_hours, status) - Number of hours worked in a day and attendance status.
+            tuple: (daily_hours, status) - Number of hours worked in a day and attendance status.
         """
-        status = random.randint(0, 1)  # 1 for present, 0 for absent
+        status = random.randint(0, 1)  
         if status == 1:
-            check_time = random.randint(0, 1)  # 0 for full-time, 1 for part-time
+            check_time = random.randint(0, 1) 
             if check_time == 0:
                 daily_hours = 8
             else:
@@ -48,9 +43,16 @@ class CompanyEmpWage:
         
         return daily_hours, status
 
-    def track_attendance(self):
+    def calculate_wages(self):
         """
-        Tracks the daily attendance of employees and updates working hours and wages.
+        Description:
+            Tracks the daily attendance of employees and updates working hours and wages.
+
+        Parameters:
+            None
+        
+        Returns:
+            None
         """
         day = 1
         while day <= self.working_days and self.total_working_hours < self.max_working_hours:
@@ -65,30 +67,35 @@ class CompanyEmpWage:
 
     def get_employee_summary(self, emp_name):
         """
-        Returns a summary for the employee's wages.
+        Description:
+            Returns a summary for the employee's wages.
 
         Parameters:
-        emp_name : str  Name of the employee.
+            emp_name : str  Name of the employee.
 
         Returns:
-        str: Summary of the employee's wage, working hours, and daily wages.
+            str: Summary of the employee's wage, working hours, and daily wages.
         """
         summary = f"Employee: {emp_name}, Total Working Hours: {self.total_working_hours}, Total Wage: {self.total_wage}\n"
         summary += "Daily Wages:\n"
-        #summary += "{\n"
-        #for day, wage in self.daily_wages.items():
-         #   summary += f"  {day}: {wage}\n"
-        #summary += "}\n"
-        return summary,self.daily_wages
+        summary += "{\n"
+        for day, wage in self.daily_wages.items():
+            summary += f"  {day}: {wage}\n"
+        summary += "}\n"
+        return summary
 
     def add_employee(self, emp_name):
         """
-        Adds an employee to the company's employee list and calculates their wages.
+        Description:
+            Adds an employee to the company's employee list and calculates their wages.
 
         Parameters:
-        emp_name : str  Name of the employee.
+            emp_name : str  Name of the employee.
+
+        Retruns:
+            None
         """
-        self.track_attendance()
+        self.calculate_wages()
         employee_details = {
             'name': emp_name,
             'total_wage': self.total_wage,
@@ -103,13 +110,16 @@ class EmpWageBuilder:
 
     def add_company(self, company_name, wage_per_hour, working_days, max_working_hours):
         """
-        Adds a new company to the builder.
+        Description:
+            Adds a new company to the builder.
 
         Parameters:
-        company_name : str  Name of the company.
-        wage_per_hour : int  Wage per hour for the company.
-        working_days : int  Number of working days in a month for the company.
-        max_working_hours : int  Maximum working hours in a month.
+            company_name : str  Name of the company.
+            wage_per_hour : int  Wage per hour for the company.
+            working_days : int  Number of working days in a month for the company.
+            max_working_hours : int  Maximum working hours in a month.
+        Returns:
+            Company
         """
         company = CompanyEmpWage(company_name, wage_per_hour, working_days, max_working_hours)
         self.companies.append(company)
@@ -117,24 +127,28 @@ class EmpWageBuilder:
 
     def calculate_wages_for_company(self, company, emp_name):
         """
-        Calculates the wages for an employee in a specific company.
+        Description:
+            Calculates the wages for an employee in a specific company.
 
         Parameters:
-        company : CompanyEmpWage  The company object.
-        emp_name : str  Name of the employee.
+            company : CompanyEmpWage  The company object.
+            emp_name : str  Name of the employee.
 
         Returns:
-        str: Employee summary after wage calculation.
+            str: Employee summary after wage calculation.
         """
         company.add_employee(emp_name)
         return company.get_employee_summary(emp_name)
 
     def show_companies(self):
         """
-        Shows the details of all companies and their employees' wages.
+        Description:
+            Shows the details of all companies and their employees' wages.
 
+        Parameters:
+            None
         Returns:
-        str: Summary of all companies and their employees.
+            str: Summary of all companies and their employees.
         """
         if not self.companies:
             return "No companies have been added yet."
@@ -177,9 +191,9 @@ def main():
                 print(f"Company {company_name} does not exist.")
             else:
                 emp_name = input("Enter the employee's name: ")
-                result,summary = builder.calculate_wages_for_company(company, emp_name)
+                result = builder.calculate_wages_for_company(company, emp_name)
                 print(result)
-                print(summary)
+                
 
         elif choice == "3":
             result = builder.show_companies()
