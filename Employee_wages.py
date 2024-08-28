@@ -9,55 +9,42 @@ import random
 
 class Employee:
     def __init__(self, employee_id, employee_name):
-        """
-        Description:
-        Initializes an Employee object with an ID and a name.
-        Parameters:
-        employee_id : integer The ID of the employee.
-        employee_name : string The name of the employee.
-        Returns:
-        None
-        """
+        
         self.employee_id = employee_id
         self.employee_name = employee_name
 
     def __str__(self):
         """
         Description:
-        Provides a string representation of the Employee object.
+            Provides a string representation of the Employee object.
+        
+        Parameters:
+            None
+        
         Returns:
-        string: A string describing the employee ID and name.
+            string: A string describing the employee ID and name.
         """
         return f"ID: {self.employee_id}, Name: {self.employee_name}"
 
 class CompanyEmpWage:
     def __init__(self, company_name, wage_per_hour, working_days):
-        """
-        Description:
-        Initializes a CompanyEmpWage object with company details and initializes
-        an employee list and total wage counter.
-        Parameters:
-        company_name : int The name of the company.
-        wage_per_hour : int The wage per hour for the company's employees.
-        working_days : int The total number of working days in a month.
-        Returns:
-        None
-        """
+       
         self.company_name = company_name
         self.wage_per_hour = wage_per_hour
         self.working_days = working_days
         self.total_wage = 0
         self.employees = []
-        self.employee_id_counter = 1  # To start employee IDs from 1 for each company
-
+        self.employee_id_counter = 1  
     def add_employee(self, employee_name):
         """
         Description:
-        Adds a new employee to the company’s employee list.
+            Adds a new employee to the company’s employee list.
+        
         Parameters:
-        employee_name : string The name of the employee to be added.
+            employee_name : string The name of the employee to be added.
+        
         Returns:
-        Employee: The Employee object that was added.
+            Employee: The Employee object that was added.
         """
         employee = Employee(self.employee_id_counter, employee_name)
         self.employees.append(employee)
@@ -67,20 +54,27 @@ class CompanyEmpWage:
     def remove_employee_by_id(self, employee_id):
         """
         Description:
-        Removes an employee from the company's employee list by their ID.
+            Removes an employee from the company's employee list by their ID.
+        
         Parameters:
-        employee_id : int The ID of the employee to be removed.
+            employee_id : int The ID of the employee to be removed.
+        
         Returns:
-        None
+            None
         """
         self.employees = [emp for emp in self.employees if emp.employee_id != employee_id]
 
     def __str__(self):
         """
+        
         Description:
-        Provides a string representation of the CompanyEmpWage object,
-        including the company’s total wage, working days, wage per hour,
-        and a list of employees.
+            Provides a string representation of the CompanyEmpWage object,
+            including the company’s total wage, working days, wage per hour,
+            and a list of employees.
+        
+        Parameters:
+            None
+        
         Returns:
         str: A string describing the company’s details and its employees.
         """
@@ -90,24 +84,21 @@ class CompanyEmpWage:
 
 class EmpWageBuilder:
     def __init__(self):
-        """
-        Description:
-        Initializes an EmpWageBuilder object, which manages a list of CompanyEmpWage objects.
-        Returns:
-        None
-        """
+        
         self.company_emp_wage_list = []
 
     def add_company_emp_wage(self, company_name, wage_per_hour, working_days):
         """
         Description:
-        Adds a new company to the list of managed companies.
+            Adds a new company to the list of managed companies.
+        
         Parameters:
-        company_name : string The name of the company.
-        wage_per_hour : int  The wage per hour for the company's employees.
-        working_days : int The number of working days in a month for the company.
+            company_name : string The name of the company.
+            wage_per_hour : int  The wage per hour for the company's employees.
+            working_days : int The number of working days in a month for the company.
+        
         Returns:
-        None
+            None
         """
         company_emp_wage = CompanyEmpWage(company_name, wage_per_hour, working_days)
         self.company_emp_wage_list.append(company_emp_wage)
@@ -115,24 +106,28 @@ class EmpWageBuilder:
     def remove_company(self, company_name):
         """
         Description:
-        Removes a company from the list by its name.
+            Removes a company from the list by its name.
+        
         Parameters:
-        company_name : string The name of the company to be removed.
+            company_name : string The name of the company to be removed.
+        
         Returns:
-        None
+            None
         """
         self.company_emp_wage_list = [company for company in self.company_emp_wage_list if company.company_name != company_name]
 
     def update_company(self, company_name, wage_per_hour=None, working_days=None):
         """
         Description:
-        Updates the details of an existing company.
+            Updates the details of an existing company.
+        
         Parameters:
-        company_name : string The name of the company to be updated.
-        wage_per_hour : int The new wage per hour (if provided).
-        working_days : int The new number of working days (if provided).
+            company_name : string The name of the company to be updated.
+            wage_per_hour : int The new wage per hour (if provided).
+            working_days : int The new number of working days (if provided).
+        
         Returns:
-        bool: True if the company was updated, False if the company was not found.
+            bool: True if the company was updated, False if the company was not found.
         """
         for company in self.company_emp_wage_list:
             if company.company_name == company_name:
@@ -146,12 +141,14 @@ class EmpWageBuilder:
     def add_employee_to_company(self, company_name, employee_name):
         """
         Description:
-        Adds a new employee to a specific company.
+            Adds a new employee to a specific company.
+        
         Parameters:
-        company_name : string The name of the company.
-        employee_name : string The name of the employee to be added.
+            company_name : string The name of the company.
+            employee_name : string The name of the employee to be added.
+        
         Returns:
-        Employee: The Employee object if the company was found and the employee was added, otherwise None.
+            Employee: The Employee object if the company was found and the employee was added, otherwise None.
         """
         for company in self.company_emp_wage_list:
             if company.company_name == company_name:
@@ -161,12 +158,14 @@ class EmpWageBuilder:
     def remove_employee_from_company(self, company_name, employee_id):
         """
         Description:
-        Removes an employee from a specific company by their ID.
+            Removes an employee from a specific company by their ID.
+        
         Parameters:
-        company_name : string The name of the company.
-        employee_id : int The ID of the employee to be removed.
+            company_name : string The name of the company.
+            employee_id : int The ID of the employee to be removed.
+        
         Returns:
-        bool: True if the employee was removed, False if the company or employee was not found.
+            bool: True if the employee was removed, False if the company or employee was not found.
         """
         for company in self.company_emp_wage_list:
             if company.company_name == company_name:
@@ -177,11 +176,13 @@ class EmpWageBuilder:
     def calculate_wage(self, company_emp_wage):
         """
         Description:
-        Calculates the total wage and total working hours for a company’s employees based on their status (full-time or part-time).
+            Calculates the total wage and total working hours for a company’s employees based on their status (full-time or part-time).
+        
         Parameters:
-        company_emp_wage (CompanyEmpWage): The company object for which the wage is being calculated.
+            company_emp_wage (CompanyEmpWage): The company object for which the wage is being calculated.
+        
         Returns:
-        None
+            None
         """
         total_working_hours = 0
         
@@ -204,9 +205,13 @@ class EmpWageBuilder:
     def calculate_wages_for_all(self):
         """
         Description:
-        Calculates wages for all companies managed by EmpWageBuilder.
+            Calculates wages for all companies managed by EmpWageBuilder.
+        
+        Parameters:
+            None
+        
         Returns:        
-        None
+            None
         """
         for company_emp_wage in self.company_emp_wage_list:
             self.calculate_wage(company_emp_wage)
@@ -214,10 +219,13 @@ class EmpWageBuilder:
     def show_company_wages(self):
         """
         Description:
-        Displays the wage details for all companies.
+            Displays the wage details for all companies.
+        
+        Parameters:
+            None
 
         Returns:
-        None
+            None
         """
         if not self.company_emp_wage_list:
             print("\nNo companies have been added yet.")
